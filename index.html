@@ -67,14 +67,16 @@
       pointer-events: none;
     }
 
-    #intro-gif {
+    #intro-video,
+    #intro-fallback {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: opacity 1.5s ease;
     }
 
-    #intro-gif.dim {
+    #intro-video.dim,
+    #intro-fallback.dim {
       opacity: 0;
     }
 
@@ -1640,7 +1642,8 @@
         animation: none;
       }
 
-      #intro-gif,
+      #intro-video,
+      #intro-fallback,
       #intro-overlay,
       .landing {
         transition: none;
@@ -1697,11 +1700,12 @@
 
   <!-- INTRO -->
   <div id="intro-overlay">
-    <video id="intro-gif" autoplay muted loop playsinline webkit-playsinline preload="auto"
+    <video id="intro-video" autoplay muted playsinline webkit-playsinline preload="auto" poster="intro-poster.png"
       aria-label="Predator fishing intro">
-      <source src="video1.webm" type="video/webm">
-      <source src="video1.mp4" type="video/mp4">
+      <source src="intro.webm" type="video/webm">
+      <source src="intro.mp4" type="video/mp4">
     </video>
+    <img id="intro-fallback" src="intro-poster.png" alt="Predator fishing" style="display:none;width:100%;height:100%;object-fit:cover;">
     <button id="skip-btn">Skip Intro</button>
   </div>
 
@@ -1921,37 +1925,12 @@
 
   <script>
     const overlay = document.getElementById('intro-overlay');
-    const gif = document.getElementById('intro-gif');
+    const video = document.getElementById('intro-video');
+    const fallbackImg = document.getElementById('intro-fallback');
     const landing = document.getElementById('landing');
     const skipBtn = document.getElementById('skip-btn');
     const aurora = document.querySelector('.aurora-overlay');
     const divider = document.querySelector('.divider');
-
-    if (gif && gif.tagName === 'VIDEO') {
-      gif.muted = true;
-      const tryPlayIntro = () => {
-        if (gif.paused) {
-          const p = gif.play();
-          if (p && typeof p.catch === 'function') p.catch(() => { });
-        }
-      };
-      if (gif.readyState >= 2) tryPlayIntro();
-      else {
-        gif.addEventListener('canplay', tryPlayIntro, { once: true });
-        gif.addEventListener('loadeddata', tryPlayIntro, { once: true });
-      }
-      document.addEventListener('visibilitychange', () => {
-        if (!document.hidden && !overlay.classList.contains('fade-out')) tryPlayIntro();
-      });
-      // Last resort: play on first user interaction if autoplay was blocked
-      const playOnInteraction = () => {
-        tryPlayIntro();
-        document.removeEventListener('click', playOnInteraction);
-        document.removeEventListener('touchstart', playOnInteraction);
-      };
-      document.addEventListener('click', playOnInteraction, { once: true });
-      document.addEventListener('touchstart', playOnInteraction, { once: true });
-    }
 
     /* Intro */
     function revealLanding() {
@@ -1964,30 +1943,103 @@
     }
 
     function endIntro() {
-      gif.classList.add('dim');
+      // Mark intro as seen
+      sessionStorage.setItem('introSeen', 'true');
+
+      video.classList.add('dim');
+      if (fallbackImg) fallbackImg.classList.add('dim');
+
       setTimeout(() => {
         revealLanding();
         setTimeout(() => {
           overlay.classList.add('fade-out');
           skipBtn.classList.add('hidden');
-          if (gif && gif.tagName === 'VIDEO') gif.pause();
+          if (video) video.pause();
         }, 400);
       }, 1200);
     }
 
-    const introTimer = setTimeout(endIntro, 5000);
-    skipBtn.addEventListener('click', () => {
-      clearTimeout(introTimer);
-      gif.classList.add('dim');
-      setTimeout(() => {
-        revealLanding();
+    // Check if intro was already seen in this session
+    if (sessionStorage.getItem('introSeen') === 'true') {
+      // Skip intro immediately
+      overlay.style.display = 'none';
+      revealLanding();
+    } else {
+      // Handle video playback
+      let videoErrorOccurred = false;
+      let fallbackTimer = null;
+
+      const tryPlayVideo = () => {
+        if (video.paused && !videoErrorOccurred) {
+          const playPromise = video.play();
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => {
+              // Autoplay failed, will try on user interaction
+            });
+          }
+        }
+      };
+
+      // Try to play when ready
+      if (video.readyState >= 2) {
+        tryPlayVideo();
+      } else {
+        video.addEventListener('canplay', tryPlayVideo, { once: true });
+        video.addEventListener('loadeddata', tryPlayVideo, { once: true });
+      }
+
+      // Handle video error - show fallback PNG and transition after 3 seconds
+      video.addEventListener('error', () => {
+        videoErrorOccurred = true;
+        video.style.display = 'none';
+        fallbackImg.style.display = 'block';
+
+        // Auto-transition after 3 seconds
+        fallbackTimer = setTimeout(() => {
+          endIntro();
+        }, 3000);
+      }, { once: true });
+
+      // Handle video end - transition to main content
+      video.addEventListener('ended', () => {
+        if (!videoErrorOccurred) {
+          endIntro();
+        }
+      }, { once: true });
+
+      // Skip button
+      skipBtn.addEventListener('click', () => {
+        if (fallbackTimer) clearTimeout(fallbackTimer);
+        video.classList.add('dim');
+        if (fallbackImg) fallbackImg.classList.add('dim');
+
         setTimeout(() => {
-          overlay.classList.add('fade-out');
-          skipBtn.classList.add('hidden');
-          if (gif && gif.tagName === 'VIDEO') gif.pause();
-        }, 300);
-      }, 600);
-    });
+          revealLanding();
+          setTimeout(() => {
+            overlay.classList.add('fade-out');
+            skipBtn.classList.add('hidden');
+            video.pause();
+            sessionStorage.setItem('introSeen', 'true');
+          }, 300);
+        }, 600);
+      });
+
+      // Retry playback if page becomes visible
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && !overlay.classList.contains('fade-out') && !videoErrorOccurred) {
+          tryPlayVideo();
+        }
+      });
+
+      // Last resort: play on first user interaction if autoplay was blocked
+      const playOnInteraction = () => {
+        if (!videoErrorOccurred) tryPlayVideo();
+        document.removeEventListener('click', playOnInteraction);
+        document.removeEventListener('touchstart', playOnInteraction);
+      };
+      document.addEventListener('click', playOnInteraction, { once: true });
+      document.addEventListener('touchstart', playOnInteraction, { once: true });
+    }
 
     /* Inline content switching */
     const serviceItems = document.querySelectorAll('.service-item[data-panel]');
