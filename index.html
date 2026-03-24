@@ -1700,7 +1700,7 @@
 
   <!-- INTRO -->
   <div id="intro-overlay">
-    <video id="intro-video" autoplay muted playsinline webkit-playsinline preload="auto" poster="intro-poster.png"
+    <video id="intro-video" autoplay muted playsinline preload="auto" poster="intro-poster.png"
       aria-label="Predator fishing intro">
       <source src="intro.webm" type="video/webm">
       <source src="intro.mp4" type="video/mp4">
@@ -1729,7 +1729,7 @@
 
         <div class="landing-content">
           <h1 class="kinetic-title" aria-label="Lakeside Predatorfishing">
-            <svg class="arched-title-svg" viewBox="-30 0 900 280" role="presentation" aria-hidden="true">
+            <svg class="arched-title-svg" viewBox="-30 0 900 280" aria-hidden="true">
               <defs>
                 <path id="main-title-arc" d="M 0 250 Q 420 20 840 250"></path>
               </defs>
@@ -2265,7 +2265,7 @@
     }
 
     function buildArchedTitle() {
-      return '<svg class="arched-title-svg" viewBox="-30 0 900 280" role="presentation" aria-hidden="true"><defs><path id="main-title-arc" d="M 0 250 Q 420 20 840 250"></path></defs><text class="arched-title-text"><textPath href="#main-title-arc" startOffset="50%" text-anchor="middle">Lakeside Predatorfishing</textPath></text></svg>';
+      return '<svg class="arched-title-svg" viewBox="-30 0 900 280" aria-hidden="true"><defs><path id="main-title-arc" d="M 0 250 Q 420 20 840 250"></path></defs><text class="arched-title-text"><textPath href="#main-title-arc" startOffset="50%" text-anchor="middle">Lakeside Predatorfishing</textPath></text></svg>';
     }
 
     function buildWords(text) {
