@@ -2063,8 +2063,6 @@
       // Last resort: play on first user interaction if autoplay was blocked
       const playOnInteraction = () => {
         if (!videoErrorOccurred) tryPlayVideo();
-        document.removeEventListener('click', playOnInteraction);
-        document.removeEventListener('touchstart', playOnInteraction);
       };
       document.addEventListener('click', playOnInteraction, { once: true });
       document.addEventListener('touchstart', playOnInteraction, { once: true });
@@ -2151,7 +2149,7 @@
         languageSelectorAria: 'Språkval',
         backToMainAria: 'Tillbaka till startsidan',
         location: 'Karasjok, Norge',
-        defaultTagline: "It's Always A Bigger Fish",
+        defaultTagline: "It's Always A Bigger Fish", // Intentionally English — brand tagline
         ctaCall: 'Ring oss',
         ctaEmail: 'Mejla oss',
         slides: {
@@ -2329,6 +2327,7 @@
     function switchContent(newId, titleText, taglineText) {
       if (isAnimating || newId === activeSlideId) return;
       isAnimating = true;
+      var safetyTimer = setTimeout(function () { isAnimating = false; }, 1000);
 
       const isTour = newId !== 'content-default';
       const currentSlide = document.getElementById(activeSlideId);
@@ -2362,6 +2361,7 @@
       updateTopCompanyName(newId);
 
       setTimeout(() => {
+        clearTimeout(safetyTimer);
         currentSlide.classList.remove('exit-left');
         currentSlide.classList.add('hidden');
         activeSlideId = newId;
@@ -2441,6 +2441,10 @@
 
     /* Keyboard navigation */
     document.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      var tag = document.activeElement && document.activeElement.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      e.preventDefault();
       if (e.key === 'ArrowLeft') goToPage(currentPage - 1);
       if (e.key === 'ArrowRight') goToPage(currentPage + 1);
     });
@@ -2469,7 +2473,7 @@
       var nudgeTimer = null;
       var nudgeFired = false;
 
-      function scheduleNudge() {
+      window.scheduleNudge = function scheduleNudge() {
         if (nudgeFired) return;
         nudgeTimer = setTimeout(function () {
           if (document.hidden || activeSlideId !== 'content-default') return;
@@ -2485,9 +2489,6 @@
           }, 1800);
         }, 12000);
       }
-
-      // Start timer after landing is revealed, not on page load
-      window.scheduleNudge = scheduleNudge;
 
       // Cancel if user interacts with a service item
       serviceItems.forEach(function (item) {
