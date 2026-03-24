@@ -18,6 +18,9 @@
       --mist-grey: #F2F5F4;
       --warm-rope: #C8A96A;
       --charcoal: #2A2E2F;
+      --black: #000;
+      --white: #fff;
+      --warm-rope-light: #d4b87a;
       --space-2xs: 0.25rem;
       --space-xs: 0.4rem;
       --space-sm: 0.65rem;
@@ -63,7 +66,7 @@
     body {
       font-family: 'Exo 2', sans-serif;
       color: var(--charcoal);
-      background: #000;
+      background: var(--black);
     }
 
     /* ============================================
@@ -73,7 +76,7 @@
       position: fixed;
       inset: 0;
       z-index: 1000;
-      background: #000;
+      background: var(--black);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -125,7 +128,7 @@
 
     #skip-btn:hover {
       background: rgba(255, 255, 255, 0.2);
-      color: #fff;
+      color: var(--white);
     }
 
     #skip-btn.hidden {
@@ -180,7 +183,7 @@
       background:
         radial-gradient(ellipse 80% 50% at 20% 60%, rgba(95, 125, 106, 0.15) 0%, transparent 60%),
         radial-gradient(ellipse 60% 40% at 75% 40%, rgba(31, 58, 68, 0.2) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 60% at 50% 80%, rgba(200, 169, 106, 0.08) 0%, transparent 50%);
+        radial-gradient(ellipse 50% 60% at 50% 80%, color-mix(in srgb, var(--warm-rope) 8%, transparent) 0%, transparent 50%);
       animation: auroraDrift 20s ease-in-out infinite alternate;
       animation-play-state: paused;
     }
@@ -267,7 +270,7 @@
       font-family: 'Teko', sans-serif;
       font-size: 0.85rem;
       font-weight: 500;
-      color: rgba(242, 245, 244, 0.6);
+      color: color-mix(in srgb, var(--mist-grey) 60%, transparent);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       line-height: 1.15;
@@ -288,7 +291,7 @@
       gap: 0.15rem;
       padding: 0.15rem;
       border-radius: 999px;
-      border: 1px solid rgba(242, 245, 244, 0.28);
+      border: 1px solid color-mix(in srgb, var(--mist-grey) 28%, transparent);
       background: rgba(10, 16, 21, 0.45);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -300,7 +303,7 @@
       border: none;
       border-radius: 999px;
       background: transparent;
-      color: rgba(242, 245, 244, 0.75);
+      color: color-mix(in srgb, var(--mist-grey) 75%, transparent);
       font-family: 'Exo 2', sans-serif;
       font-size: 0.66rem;
       letter-spacing: 0.08em;
@@ -309,7 +312,7 @@
     }
 
     .lang-btn:hover {
-      color: #fff;
+      color: var(--white);
       transform: translateY(-1px);
     }
 
@@ -323,7 +326,7 @@
     h1 {
       font-family: 'Teko', sans-serif;
       font-size: clamp(1.6rem, 4vw, 2.75rem);
-      color: #fff;
+      color: var(--white);
       font-weight: 500;
       letter-spacing: 0.02em;
       line-height: 1.1;
@@ -359,7 +362,7 @@
       font-size: 96px;
       font-weight: 500;
       letter-spacing: 0.05em;
-      fill: #fff;
+      fill: var(--white);
     }
 
     .tagline {
@@ -495,7 +498,7 @@
     }
 
     .content-slide {
-      color: rgba(242, 245, 244, 0.6);
+      color: color-mix(in srgb, var(--mist-grey) 60%, transparent);
       font-size: 0.88rem;
       line-height: 1.65;
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, filter 0.4s ease;
@@ -555,7 +558,7 @@
 
     .tour-detail .chip-label {
       font-size: 0.62rem;
-      color: rgba(242, 245, 244, 0.4);
+      color: color-mix(in srgb, var(--mist-grey) 40%, transparent);
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin-top: 0.1rem;
@@ -572,7 +575,7 @@
     }
 
     .service-item.active .explore-hint {
-      color: rgba(200, 169, 106, 0.6);
+      color: color-mix(in srgb, var(--warm-rope) 60%, transparent);
     }
 
     /* Title/tagline swap transitions */
@@ -611,7 +614,7 @@
 
     .service-item {
       text-align: center;
-      color: rgba(242, 245, 244, 0.5);
+      color: color-mix(in srgb, var(--mist-grey) 50%, transparent);
       cursor: pointer;
       transition: all 0.3s;
       position: relative;
@@ -681,7 +684,7 @@
     .service-item .explore-hint {
       display: block;
       font-size: 0.58rem;
-      color: rgba(242, 245, 244, 0.3);
+      color: color-mix(in srgb, var(--mist-grey) 30%, transparent);
       letter-spacing: 0.05em;
       margin-top: 0.3rem;
       text-transform: none;
@@ -689,7 +692,7 @@
     }
 
     .service-item:hover .explore-hint {
-      color: rgba(200, 169, 106, 0.6);
+      color: color-mix(in srgb, var(--warm-rope) 60%, transparent);
     }
 
     /* Glow pulse ring */
@@ -698,7 +701,7 @@
       position: absolute;
       inset: -6px;
       border-radius: 8px;
-      background: radial-gradient(ellipse, rgba(200, 169, 106, 0.18), transparent 70%);
+      background: radial-gradient(ellipse, color-mix(in srgb, var(--warm-rope) 18%, transparent), transparent 70%);
       opacity: 0.4;
       animation: glowPulse 3s ease-in-out infinite;
       pointer-events: none;
@@ -779,7 +782,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(200, 169, 106, 0.4), transparent);
+      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--warm-rope) 40%, transparent), transparent);
       transform: translateX(-100%);
       animation: shimmerSweep 0.8s ease-in-out both;
       animation-delay: 3.8s;
@@ -882,22 +885,22 @@
     }
 
     .btn-primary:hover {
-      background: #d4b87a;
+      background: var(--warm-rope-light);
       transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(200, 169, 106, 0.3);
+      box-shadow: 0 4px 20px color-mix(in srgb, var(--warm-rope) 30%, transparent);
     }
 
     .btn-outline {
       background: transparent;
       color: var(--mist-grey);
-      border-color: rgba(242, 245, 244, 0.3);
+      border-color: color-mix(in srgb, var(--mist-grey) 30%, transparent);
     }
 
     .btn-outline:hover {
       border-color: var(--warm-rope);
       color: var(--warm-rope);
       transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(200, 169, 106, 0.1);
+      box-shadow: 0 4px 20px color-mix(in srgb, var(--warm-rope) 10%, transparent);
     }
 
 
@@ -927,11 +930,11 @@
       display: flex;
       gap: 2.2rem;
       font-size: 0.8rem;
-      color: rgba(242, 245, 244, 0.7);
+      color: color-mix(in srgb, var(--mist-grey) 70%, transparent);
     }
 
     .bottom-bar .contact-info a {
-      color: rgba(242, 245, 244, 0.7);
+      color: color-mix(in srgb, var(--mist-grey) 70%, transparent);
       text-decoration: none;
       transition: color 0.3s;
     }
@@ -942,7 +945,7 @@
 
     .bottom-bar .copyright {
       font-size: 0.7rem;
-      color: rgba(242, 245, 244, 0.4);
+      color: color-mix(in srgb, var(--mist-grey) 40%, transparent);
     }
 
     @keyframes fadeUp {
@@ -980,9 +983,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #000;
+      background: var(--black);
     }
 
+
+    .gallery-bg-fill {
+      position: absolute;
+      inset: 0;
+      background: #0a1015;
+    }
 
     .gallery-page .readability-overlay {
       position: absolute;
@@ -1007,14 +1016,14 @@
     .gallery-content h2 {
       font-family: 'Teko', sans-serif;
       font-size: clamp(2rem, 5vw, 3.5rem);
-      color: #fff;
+      color: var(--white);
       font-weight: 500;
       letter-spacing: 0.04em;
       line-height: 1.1;
     }
 
     .gallery-content p {
-      color: rgba(242, 245, 244, 0.6);
+      color: color-mix(in srgb, var(--mist-grey) 60%, transparent);
       font-size: 0.92rem;
       line-height: 1.7;
       max-width: 460px;
@@ -1042,7 +1051,7 @@
       font-family: 'Teko', sans-serif;
       font-size: clamp(1.4rem, 3vw, 2rem);
       font-weight: 500;
-      color: rgba(242, 245, 244, 0.7);
+      color: color-mix(in srgb, var(--mist-grey) 70%, transparent);
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
@@ -1073,11 +1082,11 @@
       gap: 0.5rem;
       padding: 0.5rem 1.2rem;
       border-radius: 999px;
-      border: 1px solid rgba(242, 245, 244, 0.15);
+      border: 1px solid color-mix(in srgb, var(--mist-grey) 15%, transparent);
       background: rgba(10, 16, 21, 0.5);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      color: rgba(242, 245, 244, 0.6);
+      color: color-mix(in srgb, var(--mist-grey) 60%, transparent);
       text-decoration: none;
       font-size: 0.75rem;
       letter-spacing: 0.03em;
@@ -1085,8 +1094,8 @@
     }
 
     .tile-social-link:hover {
-      color: #fff;
-      border-color: rgba(242, 245, 244, 0.35);
+      color: var(--white);
+      border-color: color-mix(in srgb, var(--mist-grey) 35%, transparent);
       transform: translateY(-2px);
     }
 
@@ -1159,19 +1168,19 @@
       font-family: 'Teko', sans-serif;
       font-size: 2rem;
       font-weight: 400;
-      color: rgba(242, 245, 244, 0.8);
+      color: color-mix(in srgb, var(--mist-grey) 80%, transparent);
       line-height: 1;
     }
 
     .tile-more-label {
       font-size: 0.72rem;
-      color: rgba(242, 245, 244, 0.6);
+      color: color-mix(in srgb, var(--mist-grey) 60%, transparent);
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
     .tile-more:hover .tile-more-icon {
-      color: #fff;
+      color: var(--white);
     }
 
     .tile-more:hover .tile-more-label {
@@ -1207,8 +1216,8 @@
       background: rgba(10, 16, 21, 0.45);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(242, 245, 244, 0.2);
-      color: rgba(242, 245, 244, 0.7);
+      border: 1px solid color-mix(in srgb, var(--mist-grey) 20%, transparent);
+      color: color-mix(in srgb, var(--mist-grey) 70%, transparent);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -1218,7 +1227,7 @@
 
     .page-arrow:hover {
       color: var(--warm-rope);
-      border-color: rgba(200, 169, 106, 0.4);
+      border-color: color-mix(in srgb, var(--warm-rope) 40%, transparent);
       transform: translateY(-50%) scale(1.05);
     }
 
@@ -1260,7 +1269,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: rgba(242, 245, 244, 0.3);
+      background: color-mix(in srgb, var(--mist-grey) 30%, transparent);
       border: none;
       cursor: pointer;
       transition: background 0.3s ease, transform 0.3s ease;
@@ -1268,7 +1277,7 @@
     }
 
     .page-dot:hover {
-      background: rgba(242, 245, 244, 0.5);
+      background: color-mix(in srgb, var(--mist-grey) 50%, transparent);
       transform: scale(1.2);
     }
 
@@ -1487,13 +1496,13 @@
         width: 3px;
         height: 3px;
         border-radius: 50%;
-        background: rgba(200, 169, 106, 0.45);
+        background: color-mix(in srgb, var(--warm-rope) 45%, transparent);
       }
 
       .bottom-bar .copyright {
         font-size: 0.6rem;
         opacity: 0.6;
-        border-top: 1px solid rgba(242, 245, 244, 0.06);
+        border-top: 1px solid color-mix(in srgb, var(--mist-grey) 6%, transparent);
         margin-top: 0.1rem;
         padding-top: 0.5rem;
         width: 100%;
@@ -1885,7 +1894,7 @@
 
       <!-- PHOTO GALLERY PAGE -->
       <section class="page gallery-page" data-page="1" role="group" aria-roledescription="slide" aria-label="Photo gallery">
-        <div style="position:absolute;inset:0;background:#0a1015;"></div>
+        <div class="gallery-bg-fill"></div>
         <div class="tile-header">
           <h2 class="tile-title" id="tile-title">From the Water</h2>
           <p class="tile-subtitle" id="tile-subtitle">Every trip tells a story, here's a glimpse of ours</p>
