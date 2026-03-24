@@ -1187,23 +1187,6 @@
       color: var(--warm-rope);
     }
 
-    @media (max-width: 600px) {
-      .tile-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 4px;
-        padding: 1rem;
-        max-width: 95vw;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .tile-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 3px;
-        padding: 0.75rem;
-      }
-    }
-
     /* Page arrows */
     .page-arrow {
       position: fixed;
@@ -1573,6 +1556,13 @@
         font-size: 0.8rem;
         max-width: 340px;
       }
+
+      .tile-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        padding: 1rem;
+        max-width: 95vw;
+      }
     }
 
     @media (max-width: 380px) {
@@ -1637,6 +1627,12 @@
 
       .bottom-bar .copyright {
         font-size: 0.58rem;
+      }
+
+      .tile-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+        padding: 0.75rem;
       }
     }
 
