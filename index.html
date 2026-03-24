@@ -36,6 +36,24 @@
       box-sizing: border-box;
     }
 
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: var(--space-md);
+      z-index: 10000;
+      padding: var(--space-xs) var(--space-md);
+      background: var(--warm-rope);
+      color: var(--fjord-blue);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
     html,
     body {
       height: 100%;
@@ -216,6 +234,10 @@
       gap: 0.4rem;
       max-width: 760px;
       transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .landing-header {
+      display: contents;
     }
 
     .top-company-name {
@@ -598,6 +620,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    .service-item:focus-visible {
+      outline: 2px solid var(--warm-rope);
+      outline-offset: 4px;
     }
 
     .service-item:hover {
@@ -1704,6 +1731,7 @@
 </head>
 
 <body>
+  <a href="#landing" class="skip-link">Skip to content</a>
 
   <!-- INTRO -->
   <div id="intro-overlay">
@@ -1717,22 +1745,24 @@
   </div>
 
   <!-- PAGE SLIDER -->
-  <div class="page-slider">
+  <div class="page-slider" role="region" aria-roledescription="carousel" aria-label="Site pages">
     <div class="page-track">
 
       <!-- LANDING PAGE -->
-      <main class="landing page" id="landing">
+      <main class="landing page" id="landing" role="group" aria-roledescription="slide" aria-label="Landing page">
         <img src="background-image.png" alt="Norwegian fjord landscape" class="landing-bg" fetchpriority="high" decoding="async" width="2752" height="1536">
         <div class="readability-overlay" aria-hidden="true"></div>
         <div class="aurora-overlay" aria-hidden="true"></div>
         <div class="grain-overlay" aria-hidden="true"></div>
-        <button class="top-company-name" aria-label="Back to main page">
-          <span class="top-company-text">Lakeside<br>Predatorfishing</span>
-        </button>
-        <div class="language-switcher" role="group" aria-label="Language selector">
-          <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
-          <button type="button" class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
-        </div>
+        <header class="landing-header">
+          <button class="top-company-name" aria-label="Back to main page">
+            <span class="top-company-text">Lakeside<br>Predatorfishing</span>
+          </button>
+          <div class="language-switcher" role="group" aria-label="Language selector">
+            <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+          </div>
+        </header>
 
         <div class="landing-content">
           <h1 class="kinetic-title" aria-label="Lakeside Predatorfishing">
@@ -1804,7 +1834,7 @@
           </div>
 
           <div class="services-row">
-            <div class="service-item" data-panel="guided" data-title="DAY TRIP"
+            <div class="service-item" role="button" tabindex="0" data-panel="guided" data-title="DAY TRIP"
               data-tagline="A Complete One-Day Predator Fishing Package">
               <div class="icon">
                 <svg viewBox="0 0 24 24">
@@ -1820,7 +1850,7 @@
               <span>DAY TRIP</span>
               <span class="explore-hint">Explore</span>
             </div>
-            <div class="service-item" data-panel="booking" data-title="PRIVATE TRIP"
+            <div class="service-item" role="button" tabindex="0" data-panel="booking" data-title="PRIVATE TRIP"
               data-tagline="A Private Package Built Around Your Group">
               <div class="icon">
                 <svg viewBox="0 0 24 24">
@@ -1833,7 +1863,7 @@
               <span>PRIVATE TRIP</span>
               <span class="explore-hint">Explore</span>
             </div>
-            <div class="service-item" data-panel="lessons" data-title="SEASONAL TRIP"
+            <div class="service-item" role="button" tabindex="0" data-panel="lessons" data-title="SEASONAL TRIP"
               data-tagline="Multi-Day Packages For Every Season">
               <div class="icon">
                 <svg viewBox="0 0 24 24">
@@ -1853,17 +1883,17 @@
         </div>
 
 
-        <div class="bottom-bar">
+        <footer class="bottom-bar">
           <div class="contact-info">
             <span>Karasjok, Norway</span>
             <a href="tel:076-897-94-72">076-897 94 72</a>
           </div>
           <span class="copyright">&copy; 2026 Lakeside Predatorfishing</span>
-        </div>
+        </footer>
       </main>
 
       <!-- PHOTO GALLERY PAGE -->
-      <section class="page gallery-page" data-page="1">
+      <section class="page gallery-page" data-page="1" role="group" aria-roledescription="slide" aria-label="Photo gallery">
         <div style="position:absolute;inset:0;background:#0a1015;"></div>
         <div class="tile-header">
           <h2 class="tile-title" id="tile-title">From the Water</h2>
@@ -2368,6 +2398,15 @@
         serviceItems.forEach(si => si.classList.remove('active'));
         item.classList.add('active');
         switchContent(targetId, panelTitle, panelTagline);
+      });
+    });
+
+    serviceItems.forEach(item => {
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          item.click();
+        }
       });
     });
 
