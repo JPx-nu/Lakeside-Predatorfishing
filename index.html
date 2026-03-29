@@ -26,6 +26,8 @@
   <meta property="og:image:alt" content="Fishing guide holding a pike on a Norwegian lake at golden hour">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="sv_SE">
+  <meta name="contact-api-url" content="">
+  <meta name="contact-site-key" content="lakeside-predatorfishing">
 
   <!-- Twitter/X Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -1104,6 +1106,190 @@
       box-shadow: 0 4px 20px color-mix(in srgb, var(--warm-rope) 10%, transparent);
     }
 
+    .btn-outline[aria-expanded="true"] {
+      border-color: var(--warm-rope);
+      color: var(--warm-rope);
+      background: rgba(200, 169, 106, 0.08);
+    }
+
+    .contact-panel {
+      width: min(100%, 620px);
+      margin-top: 0.9rem;
+      padding: 1rem 1rem 1.1rem;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--mist-grey) 14%, transparent);
+      background: rgba(8, 14, 19, 0.62);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .contact-panel[hidden] {
+      display: none;
+    }
+
+    .contact-panel-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .contact-panel-title {
+      margin: 0;
+      font-family: "Teko", sans-serif;
+      font-size: 1.55rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mist-grey);
+    }
+
+    .contact-panel-copy {
+      margin: 0.2rem 0 0;
+      max-width: 42ch;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      color: color-mix(in srgb, var(--mist-grey) 62%, transparent);
+    }
+
+    .contact-panel-close {
+      width: 36px;
+      height: 36px;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--mist-grey) 14%, transparent);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--mist-grey);
+      cursor: pointer;
+      transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    }
+
+    .contact-panel-close:hover {
+      border-color: var(--warm-rope);
+      color: var(--warm-rope);
+      transform: translateY(-1px);
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 0.95rem;
+    }
+
+    .contact-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .contact-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.38rem;
+    }
+
+    .contact-field label {
+      font-size: 0.64rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--mist-grey) 54%, transparent);
+    }
+
+    .contact-field input,
+    .contact-field select,
+    .contact-field textarea {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid color-mix(in srgb, var(--mist-grey) 14%, transparent);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--mist-grey);
+      font: inherit;
+      padding: 0.8rem 0.9rem;
+      transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .contact-field select {
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--mist-grey) 50%),
+        linear-gradient(135deg, var(--mist-grey) 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) calc(50% - 2px),
+        calc(100% - 12px) calc(50% - 2px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 2.6rem;
+    }
+
+    .contact-field input::placeholder,
+    .contact-field textarea::placeholder {
+      color: color-mix(in srgb, var(--mist-grey) 28%, transparent);
+    }
+
+    .contact-field input:focus,
+    .contact-field select:focus,
+    .contact-field textarea:focus {
+      outline: none;
+      border-color: color-mix(in srgb, var(--warm-rope) 68%, transparent);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 0 3px rgba(200, 169, 106, 0.08);
+    }
+
+    .contact-field textarea {
+      min-height: 132px;
+      resize: vertical;
+    }
+
+    .contact-honeypot {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .contact-form-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-submit {
+      min-width: 174px;
+    }
+
+    .contact-submit[disabled] {
+      opacity: 0.72;
+      cursor: wait;
+    }
+
+    .contact-status {
+      margin: 0;
+      flex: 1 1 220px;
+      min-height: 1.2rem;
+      font-size: 0.72rem;
+      line-height: 1.45;
+      color: color-mix(in srgb, var(--mist-grey) 55%, transparent);
+    }
+
+    .contact-status[data-state="success"] {
+      color: color-mix(in srgb, var(--moss-green) 84%, white);
+    }
+
+    .contact-status[data-state="error"] {
+      color: color-mix(in srgb, #f1a29a 78%, white);
+    }
+
+    .contact-note {
+      margin: 0;
+      font-size: 0.68rem;
+      line-height: 1.55;
+      color: color-mix(in srgb, var(--mist-grey) 42%, transparent);
+    }
+
 
     /* ============================================
        BOTTOM BAR
@@ -1570,6 +1756,10 @@
         margin-top: var(--space-sm);
       }
 
+      .contact-panel {
+        padding: 0.95rem;
+      }
+
 
 
       .btn {
@@ -1662,6 +1852,29 @@
 
       .cta-row {
         margin-top: var(--space-xs);
+      }
+
+      .contact-panel {
+        margin-top: 0.75rem;
+        padding: 0.9rem 0.85rem 0.95rem;
+      }
+
+      .contact-panel-header {
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .contact-panel-close {
+        align-self: flex-end;
+      }
+
+      .contact-form-grid {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+      }
+
+      .contact-submit {
+        width: 100%;
       }
 
 
@@ -1851,6 +2064,26 @@
         padding: 0 var(--space-sm);
       }
 
+      .contact-panel {
+        padding: 0.8rem;
+      }
+
+      .contact-panel-title {
+        font-size: 1.35rem;
+      }
+
+      .contact-panel-copy,
+      .contact-status,
+      .contact-note {
+        font-size: 0.66rem;
+      }
+
+      .contact-field input,
+      .contact-field select,
+      .contact-field textarea {
+        padding: 0.72rem 0.8rem;
+      }
+
       h1 {
         font-size: clamp(1.35rem, 8.5vw, 1.7rem);
       }
@@ -1979,6 +2212,10 @@
         flex-direction: row;
         gap: 0.5rem;
         margin-top: var(--space-xs);
+      }
+
+      .contact-panel {
+        margin-top: 0.65rem;
       }
 
       .btn {
@@ -2157,6 +2394,8 @@
         transition: none;
       }
 
+      .contact-panel,
+      .contact-panel-close,
       .page-arrow {
         transition: none;
       }
@@ -2290,8 +2529,67 @@
 
           <div class="cta-row">
             <a href="tel:+46-76-897-94-72" class="btn btn-primary">Call Us</a>
-            <a href="mailto:info@lakesidepredatorfishing.com?bcc=asgjohan@gmail.com,ola_sjodahl@hotmail.com,johan@jpx.nu" class="btn btn-outline">Email Us</a>
+            <button type="button" class="btn btn-outline" id="email-cta" aria-expanded="false" aria-controls="contact-panel">Email Us</button>
           </div>
+
+          <section class="contact-panel" id="contact-panel" aria-hidden="true" hidden>
+            <div class="contact-panel-header">
+              <div>
+                <h2 class="contact-panel-title" id="contact-form-title">Plan Your Fishing Trip</h2>
+                <p class="contact-panel-copy" id="contact-form-copy">Share a few details and we will get back to you personally.</p>
+              </div>
+              <button type="button" class="contact-panel-close" id="contact-panel-close" aria-label="Close contact form">&times;</button>
+            </div>
+
+            <form class="contact-form" id="contact-form" novalidate>
+              <input type="hidden" name="siteKey" value="lakeside-predatorfishing">
+
+              <div class="contact-honeypot" aria-hidden="true">
+                <label for="contact-company" id="contact-company-label">Company</label>
+                <input id="contact-company" name="company" type="text" tabindex="-1" autocomplete="off">
+              </div>
+
+              <div class="contact-form-grid">
+                <div class="contact-field">
+                  <label for="contact-name" id="contact-name-label">Your Name</label>
+                  <input id="contact-name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+                </div>
+                <div class="contact-field">
+                  <label for="contact-email" id="contact-email-label">Email Address</label>
+                  <input id="contact-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+                </div>
+              </div>
+
+              <div class="contact-form-grid">
+                <div class="contact-field">
+                  <label for="contact-trip-type" id="contact-trip-type-label">Trip Type</label>
+                  <select id="contact-trip-type" name="tripType">
+                    <option value="" id="contact-trip-placeholder">Select a trip</option>
+                    <option value="day-trip" id="contact-trip-day">Day Trip</option>
+                    <option value="private-trip" id="contact-trip-private">Private Trip</option>
+                    <option value="seasonal-trip" id="contact-trip-seasonal">Seasonal Trip</option>
+                    <option value="custom-trip" id="contact-trip-custom">Not sure yet</option>
+                  </select>
+                </div>
+                <div class="contact-field">
+                  <label for="contact-party-size" id="contact-party-size-label">Party Size</label>
+                  <input id="contact-party-size" name="partySize" type="text" placeholder="2 anglers" autocomplete="off">
+                </div>
+              </div>
+
+              <div class="contact-field">
+                <label for="contact-message" id="contact-message-label">Tell Us About Your Trip</label>
+                <textarea id="contact-message" name="message" placeholder="Tell us when you want to fish, how many you are, and what kind of trip you want." required></textarea>
+              </div>
+
+              <div class="contact-form-actions">
+                <button type="submit" class="btn btn-outline contact-submit" id="contact-submit">Send Inquiry</button>
+                <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
+              </div>
+
+              <p class="contact-note" id="contact-form-note">Your message goes to our main inbox and internal trip-planning team.</p>
+            </form>
+          </section>
 
           <div class="services-row">
             <div class="service-item" role="button" tabindex="0" data-panel="guided" data-title="DAY TRIP"
@@ -2544,8 +2842,35 @@
     const pageTitleEl = document.querySelector('title');
     const metaDescriptionEl = document.querySelector('meta[name="description"]');
     const callBtnEl = document.querySelector('.btn-primary');
-    const emailBtnEl = document.querySelector('.btn-outline');
+    const emailBtnEl = document.getElementById('email-cta');
     const locationEl = document.querySelector('.contact-info span');
+    const contactPanelEl = document.getElementById('contact-panel');
+    const contactPanelCloseEl = document.getElementById('contact-panel-close');
+    const contactFormEl = document.getElementById('contact-form');
+    const contactFormTitleEl = document.getElementById('contact-form-title');
+    const contactFormCopyEl = document.getElementById('contact-form-copy');
+    const contactNameLabelEl = document.getElementById('contact-name-label');
+    const contactNameEl = document.getElementById('contact-name');
+    const contactEmailLabelEl = document.getElementById('contact-email-label');
+    const contactEmailEl = document.getElementById('contact-email');
+    const contactTripTypeLabelEl = document.getElementById('contact-trip-type-label');
+    const contactTripTypeEl = document.getElementById('contact-trip-type');
+    const contactTripPlaceholderEl = document.getElementById('contact-trip-placeholder');
+    const contactTripDayEl = document.getElementById('contact-trip-day');
+    const contactTripPrivateEl = document.getElementById('contact-trip-private');
+    const contactTripSeasonalEl = document.getElementById('contact-trip-seasonal');
+    const contactTripCustomEl = document.getElementById('contact-trip-custom');
+    const contactPartySizeLabelEl = document.getElementById('contact-party-size-label');
+    const contactPartySizeEl = document.getElementById('contact-party-size');
+    const contactMessageLabelEl = document.getElementById('contact-message-label');
+    const contactMessageEl = document.getElementById('contact-message');
+    const contactCompanyLabelEl = document.getElementById('contact-company-label');
+    const contactSubmitEl = document.getElementById('contact-submit');
+    const contactStatusEl = document.getElementById('contact-status');
+    const contactFormNoteEl = document.getElementById('contact-form-note');
+    const contactApiMetaEl = document.querySelector('meta[name="contact-api-url"]');
+    const contactSiteKeyMetaEl = document.querySelector('meta[name="contact-site-key"]');
+    const localContactApiUrl = 'http://127.0.0.1:7071/api/contact';
 
     const defaultSlideEl = document.getElementById('content-default');
     const guidedSlideEl = document.getElementById('content-guided');
@@ -2602,6 +2927,42 @@
           seeMore: 'See More',
           facebook: 'Follow us on Facebook',
           whatsapp: 'Message us on WhatsApp'
+        },
+        contactForm: {
+          title: 'Plan Your Fishing Trip',
+          copy: 'Share a few details and we will get back to you personally.',
+          closeLabel: 'Close contact form',
+          fields: {
+            name: 'Your Name',
+            email: 'Email Address',
+            tripType: 'Trip Type',
+            partySize: 'Party Size',
+            message: 'Tell Us About Your Trip',
+            company: 'Company'
+          },
+          tripOptions: {
+            placeholder: 'Select a trip',
+            day: 'Day Trip',
+            private: 'Private Trip',
+            seasonal: 'Seasonal Trip',
+            custom: 'Not sure yet'
+          },
+          placeholders: {
+            name: 'Your name',
+            email: 'you@example.com',
+            partySize: '2 anglers',
+            message: 'Tell us when you want to fish, how many you are, and what kind of trip you want.'
+          },
+          submitIdle: 'Send Inquiry',
+          submitBusy: 'Sending...',
+          note: 'Your message goes to our main inbox and internal trip-planning team.',
+          status: {
+            loading: 'Sending your message...',
+            success: 'Thanks, your message is on its way. We usually reply personally as soon as possible.',
+            validation: 'Please fill in your name, email, and message before sending.',
+            config: 'The contact form is still being connected. Please call us for now.',
+            error: 'We could not send your message right now. Please try again or call us instead.'
+          }
         }
       },
       sv: {
@@ -2653,6 +3014,42 @@
           seeMore: 'Se mer',
           facebook: 'F\u00f6lj oss p\u00e5 Facebook',
           whatsapp: 'Skriv till oss p\u00e5 WhatsApp'
+        },
+        contactForm: {
+          title: 'Planera Er Fisketur',
+          copy: 'Ber\u00e4tta lite om er resa s\u00e5 \u00e5terkommer vi personligen.',
+          closeLabel: 'St\u00e4ng kontaktformul\u00e4ret',
+          fields: {
+            name: 'Ditt namn',
+            email: 'E-postadress',
+            tripType: 'Typ av tur',
+            partySize: 'Antal personer',
+            message: 'Ber\u00e4tta om er tur',
+            company: 'F\u00f6retag'
+          },
+          tripOptions: {
+            placeholder: 'V\u00e4lj en tur',
+            day: 'Dagstur',
+            private: 'Privat tur',
+            seasonal: 'S\u00e4songstur',
+            custom: 'Inte s\u00e4ker \u00e4n'
+          },
+          placeholders: {
+            name: 'Ditt namn',
+            email: 'du@exempel.se',
+            partySize: '2 personer',
+            message: 'Ber\u00e4tta n\u00e4r ni vill fiska, hur m\u00e5nga ni \u00e4r och vilken typ av tur ni vill ha.'
+          },
+          submitIdle: 'Skicka f\u00f6rfr\u00e5gan',
+          submitBusy: 'Skickar...',
+          note: 'Ditt meddelande g\u00e5r till v\u00e5r huvudadress och v\u00e5rt interna planeringsteam.',
+          status: {
+            loading: 'Skickar ditt meddelande...',
+            success: 'Tack, ditt meddelande \u00e4r p\u00e5 v\u00e4g. Vi svarar vanligtvis personligen s\u00e5 snart vi kan.',
+            validation: 'Fyll i namn, e-post och meddelande innan du skickar.',
+            config: 'Kontaktformul\u00e4ret h\u00e5ller fortfarande p\u00e5 att kopplas in. Ring oss g\u00e4rna s\u00e5 l\u00e4nge.',
+            error: 'Vi kunde inte skicka ditt meddelande just nu. F\u00f6rs\u00f6k igen eller ring oss i st\u00e4llet.'
+          }
         }
       }
     };
@@ -2726,6 +3123,78 @@
       if (sm) sm.textContent = tp.seeMore;
     }
 
+    function getContactSiteKey() {
+      if (contactSiteKeyMetaEl && contactSiteKeyMetaEl.content.trim()) return contactSiteKeyMetaEl.content.trim();
+      return 'lakeside-predatorfishing';
+    }
+
+    function getContactApiUrl() {
+      if (contactApiMetaEl && contactApiMetaEl.content.trim()) return contactApiMetaEl.content.trim();
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return localContactApiUrl;
+      return '';
+    }
+
+    function setContactStatus(messageKey, state) {
+      if (!contactStatusEl) return;
+      const formCopy = translations[currentLang] && translations[currentLang].contactForm;
+      const statusCopy = formCopy && formCopy.status ? formCopy.status[messageKey] : '';
+      contactStatusEl.textContent = statusCopy || '';
+      if (state) {
+        contactStatusEl.dataset.state = state;
+      } else {
+        delete contactStatusEl.dataset.state;
+      }
+    }
+
+    function setContactBusy(isBusy) {
+      if (!contactSubmitEl) return;
+      const formCopy = translations[currentLang] && translations[currentLang].contactForm;
+      contactSubmitEl.disabled = isBusy;
+      contactSubmitEl.dataset.loading = isBusy ? 'true' : 'false';
+      if (formCopy) contactSubmitEl.textContent = isBusy ? formCopy.submitBusy : formCopy.submitIdle;
+    }
+
+    function updateContactFormCopy(langData) {
+      if (!langData.contactForm) return;
+      const formCopy = langData.contactForm;
+      if (contactFormTitleEl) contactFormTitleEl.textContent = formCopy.title;
+      if (contactFormCopyEl) contactFormCopyEl.textContent = formCopy.copy;
+      if (contactPanelCloseEl) contactPanelCloseEl.setAttribute('aria-label', formCopy.closeLabel);
+      if (contactNameLabelEl) contactNameLabelEl.textContent = formCopy.fields.name;
+      if (contactEmailLabelEl) contactEmailLabelEl.textContent = formCopy.fields.email;
+      if (contactTripTypeLabelEl) contactTripTypeLabelEl.textContent = formCopy.fields.tripType;
+      if (contactPartySizeLabelEl) contactPartySizeLabelEl.textContent = formCopy.fields.partySize;
+      if (contactMessageLabelEl) contactMessageLabelEl.textContent = formCopy.fields.message;
+      if (contactCompanyLabelEl) contactCompanyLabelEl.textContent = formCopy.fields.company;
+      if (contactTripPlaceholderEl) contactTripPlaceholderEl.textContent = formCopy.tripOptions.placeholder;
+      if (contactTripDayEl) contactTripDayEl.textContent = formCopy.tripOptions.day;
+      if (contactTripPrivateEl) contactTripPrivateEl.textContent = formCopy.tripOptions.private;
+      if (contactTripSeasonalEl) contactTripSeasonalEl.textContent = formCopy.tripOptions.seasonal;
+      if (contactTripCustomEl) contactTripCustomEl.textContent = formCopy.tripOptions.custom;
+      if (contactNameEl) contactNameEl.placeholder = formCopy.placeholders.name;
+      if (contactEmailEl) contactEmailEl.placeholder = formCopy.placeholders.email;
+      if (contactPartySizeEl) contactPartySizeEl.placeholder = formCopy.placeholders.partySize;
+      if (contactMessageEl) contactMessageEl.placeholder = formCopy.placeholders.message;
+      if (contactFormNoteEl) contactFormNoteEl.textContent = formCopy.note;
+      if (contactSubmitEl && contactSubmitEl.dataset.loading !== 'true') contactSubmitEl.textContent = formCopy.submitIdle;
+      if (contactStatusEl && contactStatusEl.dataset.state !== 'success') contactStatusEl.textContent = '';
+    }
+
+    function toggleContactPanel(forceOpen) {
+      if (!contactPanelEl || !emailBtnEl) return;
+      const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : contactPanelEl.hidden;
+      contactPanelEl.hidden = !shouldOpen;
+      contactPanelEl.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
+      emailBtnEl.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+      if (shouldOpen) {
+        setTimeout(function () {
+          if (contactNameEl) contactNameEl.focus();
+        }, 0);
+      } else if (document.activeElement && contactPanelEl.contains(document.activeElement)) {
+        emailBtnEl.focus();
+      }
+    }
+
 
 
     function applyLanguage(lang) {
@@ -2757,6 +3226,7 @@
       updateActiveHeroCopy(langData);
       updateGalleryCopy(langData);
       updateTilePageCopy(langData);
+      updateContactFormCopy(langData);
 
 
       langButtons.forEach(btn => {
@@ -2849,6 +3319,79 @@
     // Apply default language on load (HTML is English, override to Swedish)
     currentLang = '';
     applyLanguage('sv');
+    if (contactFormEl) {
+      const siteKeyField = contactFormEl.querySelector('input[name="siteKey"]');
+      if (siteKeyField) siteKeyField.value = getContactSiteKey();
+    }
+
+    if (emailBtnEl) {
+      emailBtnEl.addEventListener('click', function () {
+        toggleContactPanel();
+      });
+    }
+
+    if (contactPanelCloseEl) {
+      contactPanelCloseEl.addEventListener('click', function () {
+        toggleContactPanel(false);
+      });
+    }
+
+    if (contactFormEl) {
+      contactFormEl.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        if (!contactFormEl.reportValidity()) {
+          setContactStatus('validation', 'error');
+          return;
+        }
+
+        const endpoint = getContactApiUrl();
+        if (!endpoint) {
+          setContactStatus('config', 'error');
+          return;
+        }
+
+        const formData = new FormData(contactFormEl);
+        const payload = {
+          siteKey: getContactSiteKey(),
+          name: String(formData.get('name') || '').trim(),
+          email: String(formData.get('email') || '').trim(),
+          tripType: String(formData.get('tripType') || '').trim(),
+          partySize: String(formData.get('partySize') || '').trim(),
+          message: String(formData.get('message') || '').trim(),
+          company: String(formData.get('company') || '').trim()
+        };
+
+        if (!payload.name || !payload.email || !payload.message) {
+          setContactStatus('validation', 'error');
+          return;
+        }
+
+        setContactBusy(true);
+        setContactStatus('loading');
+
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+          const responseBody = await response.json().catch(function () { return {}; });
+          if (!response.ok || responseBody.ok !== true) throw new Error(responseBody.message || 'Unable to submit contact form.');
+          contactFormEl.reset();
+          const siteKeyField = contactFormEl.querySelector('input[name="siteKey"]');
+          if (siteKeyField) siteKeyField.value = getContactSiteKey();
+          setContactStatus('success', 'success');
+        } catch (error) {
+          console.error('Contact form submission failed.', error);
+          setContactStatus('error', 'error');
+        } finally {
+          setContactBusy(false);
+        }
+      });
+    }
 
     serviceItems.forEach(item => {
       item.addEventListener('click', () => {
@@ -2955,6 +3498,10 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && lightboxEl && lightboxEl.classList.contains('visible')) {
         closeLightbox();
+        return;
+      }
+      if (e.key === 'Escape' && contactPanelEl && !contactPanelEl.hidden) {
+        toggleContactPanel(false);
         return;
       }
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
